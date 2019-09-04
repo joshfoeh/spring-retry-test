@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 public class TestRetry {
 
   @Configuration
-  @EnableRetry
+  @EnableRetry(proxyTargetClass = true)
   public static class TestConfig {
 
     private ValueService configValueService;
