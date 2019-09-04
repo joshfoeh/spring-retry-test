@@ -20,19 +20,27 @@ public class Retry {
 
   public String getValue(boolean shouldRetry) {
     if (shouldRetry) {
-      return getValueWithRetry();
+      return getValueWithRetry(false);
     }
     System.out.println("Returning without retrying");
     return valueService.getSuccessfulValue();
   }
 
   @Retryable(value = IllegalStateException.class, maxAttempts = MAX_ATTEMPTS)
-  public String getValueWithRetry() {
+  public String getValueWithRetry(boolean shouldFail) {
     System.out.println("In retry method");
+    valueService.tryService();
+
+    if (shouldFail) {
+      throw new IllegalStateException();
+    }
+
     if (!hasTried) {
+      // Always retry once
       hasTried = true;
       throw new IllegalStateException();
     }
+
     return valueService.getSuccessfulValue();
   }
 

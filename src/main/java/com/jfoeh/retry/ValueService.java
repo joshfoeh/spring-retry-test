@@ -13,4 +13,6 @@ public class ValueService {
     return "failure";
   }
 
+  public void tryService(){}
+
 }
