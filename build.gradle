@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+}
+
+group 'jfoeh'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.4.RELEASE'
+
+    // Required for Spring Retry
+    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.4'
+
+    // JUnit
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.2'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'junit', module: 'junit'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
