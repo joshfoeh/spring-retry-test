@@ -20,6 +20,7 @@ public class Retry {
 
   public String getValue(boolean shouldRetry) {
     if (shouldRetry) {
+      hasTried = false;
       return getValueWithRetry(false);
     }
     System.out.println("Returning without retrying");

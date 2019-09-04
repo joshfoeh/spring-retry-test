@@ -93,6 +93,13 @@ public class TestRetry {
     verifyNoMoreInteractions(valueService);
   }
 
+
+  /*
+  The below test should pass, but it instead throws an IllegalStateException. The getValue() method should call the
+  @Retryable getValueWithRetry() method which should then throw an exception and retry, however when
+  getValueWithRetry() is called from a method in the same class, it does not use the AOP proxy and seems to call
+  the method directly instead (which has no try/catch built in)
+   */
   @Test
   public void testProxiedRetrySuccess() {
     // Initialization
